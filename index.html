@@ -48,6 +48,9 @@
       window.addEventListener('DOMContentLoaded', () => {
         // 按鈕事件
         btn.onclick = () => {
+          // 判斷是否為空
+          if (!Input.value.replace(/\s+/g, '')) return alert('請輸入內容');
+
           // 創建標籤
           let [li, input, btn] = [
             getCreate('li'),
