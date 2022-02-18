@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tibame Todo List</title>
+    <style>
+      ul {
+        list-style: none;
+      }
+      li {
+        text-align: center;
+        margin: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%; display: flex; justify-content: center">
+      <div style="width: 300px">
+        <h1 style="text-align: center">Todo List</h1>
+        <div style="display: flex; justify-content: center">
+          <input type="text" name="" id="input" />&emsp;
+          <button id="btn">按鈕</button>
+        </div>
+        <ul id="ul"></ul>
+      </div>
+    </div>
+    <script>
+      /*
+       * 全域變數
+       */
+      // 綁定 element
+      const [btn, ul, Input] = [
+        getElement('#btn'),
+        getElement('#ul'),
+        getElement('#input'),
+      ];
+
+      /*
+       * init
+       */
+      // document 載入完後
+      window.addEventListener('DOMContentLoaded', () => {
+        // 按鈕事件
+        btn.onclick = () => {
+          // 創建標籤
+          let [li, input, btn] = [
+            getCreate('li'),
+            getCreate('input'),
+            getCreate('button'),
+          ];
+          // 添加 文字
+          btn.textContent = 'X';
+          // 添加 class
+          btn.className = 'li-btn';
+          // 把input 塞進 li
+          li.append(Input.value);
+          // 把btn 塞進 li
+          li.append(btn);
+          // 把li 塞進 ul
+          ul.append(li);
+        };
+
+        // 監聽 父元素事件
+        ul.addEventListener('click', (evnet) => {
+          // 判斷不是空就刪除
+          if (!!evnet.target.className) evnet.target.parentNode.remove();
+        });
+      });
+
+      /*
+       * 封裝
+       */
+      // 綁定後返回
+      function getElement(id) {
+        return document.querySelector(id);
+      }
+      // 綁定後返回
+      function getCreate(element) {
+        return document.createElement(element);
+      }
+    </script>
+  </body>
+</html>
